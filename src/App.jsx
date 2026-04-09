@@ -1,13 +1,18 @@
 import { BrowserRouter } from "react-router-dom";
-import { LayoutWrapper, Header, SideBar, MainContent } from "./App.styles";
+import { LayoutWrapper, ContentCanvas } from "./App.styles";
+import TopNav from "./components/TopNav";
+import SideNav from "./components/SideNav";
+import BlogArticle from "./components/BlogArticle";
 
 function App() {
   return (
     <BrowserRouter>
       <LayoutWrapper>
-        <Header>Header Content</Header>
-        <SideBar>Sidebar</SideBar>
-        <MainContent>Main Content</MainContent>
+        <TopNav />
+        <SideNav />
+        <ContentCanvas>
+          <BlogArticle />
+        </ContentCanvas>
       </LayoutWrapper>
     </BrowserRouter>
   );
