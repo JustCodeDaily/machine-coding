@@ -111,39 +111,65 @@ export const NavCategory = styled.div`
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.625rem 1rem;
-  background-color: ${props => props.$active ? 'var(--surface-white)' : 'transparent'};
-  color: ${props => props.$active ? 'var(--accent)' : 'var(--on-surface-variant)'};
-  font-weight: ${props => props.$active ? '700' : '500'};
-  border-radius: 0.5rem;
-  box-shadow: ${props => props.$active ? '0 1px 2px rgba(0,0,0,0.05)' : 'none'};
+  padding: 1.5rem 0 0.5rem 1rem;
+  color: var(--on-surface);
+  font-weight: 500;
   font-size: 0.875rem;
-  cursor: pointer;
-  
-  &:hover {
-    background-color: ${props => !props.$active && 'var(--border-color)'};
-  }
+  text-align: left;
 `;
 
 export const SubNavList = styled.div`
-  margin-left: 1.125rem;
-  border-left: 1px solid var(--border-color);
-  margin-top: 0.5rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  margin-left: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
 `;
 
 export const SubNavItem = styled(Link)`
   display: block;
-  padding: 0.375rem 1rem;
-  font-size: 0.75rem;
-  color: ${props => props.$active ? 'var(--accent)' : 'var(--on-surface-variant)'};
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  color: ${props => props.$active ? 'var(--on-surface)' : 'var(--on-surface-variant)'};
   font-weight: ${props => props.$active ? '600' : '400'};
   text-decoration: none;
+  position: relative;
+  transition: all 0.2s;
 
   &:hover {
-    color: var(--accent);
+    color: var(--on-surface);
+  }
+
+  ${props => props.$active && css`
+    &::before {
+      content: '';
+      position: absolute;
+      left: -1px;
+      top: 0.5rem;
+      bottom: 0.5rem;
+      width: 2px;
+      background-color: var(--on-surface);
+    }
+  `}
+`;
+
+export const SidebarFooter = styled.div`
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 1rem 0;
+`;
+
+export const FooterItem = styled.a`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  font-size: 0.875rem;
+  color: var(--on-surface);
+  text-decoration: none;
+  font-weight: 500;
+  
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.03);
   }
 `;
 
@@ -259,9 +285,10 @@ export const CodePre = styled.pre`
 `;
 
 export const TOCList = styled.nav`
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  margin-left: 1rem;
 `;
 
 export const TOCLink = styled.a`
@@ -269,14 +296,24 @@ export const TOCLink = styled.a`
   font-size: 0.875rem;
   font-weight: 500;
   color: ${props => props.$active ? 'var(--on-surface)' : 'var(--on-surface-variant)'};
-  border-left: 2px solid ${props => props.$active ? 'var(--accent)' : 'var(--border-color)'};
-  padding-left: 1rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
+  padding: 0.625rem 0 0.625rem 1.25rem;
   text-decoration: none;
+  position: relative;
   transition: all 0.2s;
 
   &:hover {
-    color: var(--accent);
+    color: var(--on-surface);
   }
+
+  ${props => props.$active && css`
+    &::before {
+      content: '';
+      position: absolute;
+      left: -1px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background-color: var(--on-surface);
+    }
+  `}
 `;

@@ -31,7 +31,9 @@ import {
   CodeHeader,
   CodePre,
   TOCList,
-  TOCLink
+  TOCLink,
+  SidebarFooter,
+  FooterItem
 } from "./App.styles";
 
 // --- Icons ---
@@ -177,8 +179,11 @@ const VirtualizedListPage = () => {
 
       <RightSidebar>
         <StickyNav>
-          <h5 style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#595c5e', marginBottom: '1.5rem' }}>On this page</h5>
-          <TOCList style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.5rem' }}>
+            <Icon name="menu_open" />
+            <span style={{ fontSize: '14px', fontWeight: 600, color: 'var(--on-surface)' }}>On this page</span>
+          </div>
+          <TOCList>
             {headings.map(h => (
               <TOCLink key={h.id} href={`#${h.id}`} $active={activeId === h.id}>
                 {h.text}
@@ -192,35 +197,45 @@ const VirtualizedListPage = () => {
 };
 
 // --- Main Layout ---
-const SidebarItems = () => (
+const SidebarContent = () => (
   <SideBarWrapper>
-    <SidebarHeader>
-      <SidebarTitle>Library</SidebarTitle>
-      <SidebarSubtitle>Engineering Craft</SidebarSubtitle>
-    </SidebarHeader>
+    <div style={{ display: 'flex', flexDirection: 'column', width: '100%', textAlign: 'left' }}>
+      <NavGroup>
+        <NavCategory>Get started</NavCategory>
+        <SubNavList>
+          <SubNavItem to="#" $active>Welcome</SubNavItem>
+          <SubNavItem to="#">Quickstart</SubNavItem>
+          <SubNavItem to="#">Cloud</SubNavItem>
+        </SubNavList>
+      </NavGroup>
 
-    <NavGroup>
-      <NavCategory $active><Icon name="hub" /> Core Concepts</NavCategory>
-      <SubNavList>
-        <SubNavItem to="#">DOM Management</SubNavItem>
-        <SubNavItem to="#" $active>Virtualized List</SubNavItem>
-        <SubNavItem to="#">Event Loop</SubNavItem>
-      </SubNavList>
-    </NavGroup>
+      <NavGroup>
+        <NavCategory>Capabilities</NavCategory>
+        <SubNavList>
+          <SubNavItem to="#">Streaming</SubNavItem>
+          <SubNavItem to="#">Thinking</SubNavItem>
+          <SubNavItem to="#">Structured Outputs</SubNavItem>
+          <SubNavItem to="#">Vision</SubNavItem>
+        </SubNavList>
+      </NavGroup>
 
-    <NavGroup>
-      <NavCategory><Icon name="category" /> UI Components</NavCategory>
-      <SubNavList>
-        <SubNavItem to="#">Data Tables</SubNavItem>
-        <SubNavItem to="#">Form Controls</SubNavItem>
-      </SubNavList>
-    </NavGroup>
+      <NavGroup>
+        <NavCategory>Integrations</NavCategory>
+        <SubNavList>
+          <SubNavItem to="#">Overview</SubNavItem>
+          <SubNavItem to="#">Assistants</SubNavItem>
+        </SubNavList>
+      </NavGroup>
+    </div>
 
-    <BottomActions>
-      <SubNavItem to="#"><Icon name="settings" /> Settings</SubNavItem>
-      <SubNavItem to="#"><Icon name="help" /> Support</SubNavItem>
-      <ChallengeBtn>Start Daily Challenge</ChallengeBtn>
-    </BottomActions>
+    <SidebarFooter>
+      <FooterItem href="#">
+        Sign in <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>north_east</span>
+      </FooterItem>
+      <FooterItem href="#">
+        Download <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>north_east</span>
+      </FooterItem>
+    </SidebarFooter>
   </SideBarWrapper>
 );
 
@@ -256,7 +271,7 @@ function App() {
             </TopNavContainer>
           </TopNav>
 
-          <SidebarItems />
+          <SidebarContent />
 
           <Routes>
             <Route path="/" element={<VirtualizedListPage />} />
